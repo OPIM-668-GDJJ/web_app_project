@@ -54,3 +54,58 @@
     <span class="visually-hidden">Next</span>
   </button>
 </div>
+<div id="map"></div>
+
+
+
+<script type="text/javascript">
+  let map;
+  let service;
+  let infowindow;
+
+  function initMap() {
+    const coordinates = { lat: 38.9072, lng: -77.0369 };
+
+    infowindow = new google.maps.InfoWindow();
+    map = new google.maps.Map(document.getElementById("map"), {
+      center: coordinates,
+      zoom: 14
+    });
+
+    var request = {
+        location: coordinates,
+        radius: '1000',
+        query: 'breakfast'
+      };
+    service = new google.maps.places.PlacesService(map);
+    service.textSearch(request, (results, status) => {
+      if (status === google.maps.places.PlacesServiceStatus.OK && results) {
+        for (let i = 0; i < results.length; i++) {
+          createMarker(results[i]);
+        }
+        map.setCenter(results[0].geometry.location);
+      }
+    });
+
+    function createMarker(place) {
+      if (!place.geometry || !place.geometry.location) return;
+      const marker = new google.maps.Marker({
+        map,
+        position: place.geometry.location
+      });
+      console.log("place name: ", place.name)
+      google.maps.event.addListener(marker, "click", function () {
+              infowindow.setContent(
+                "<div><strong>" +
+                  place.name +
+                  "</strong></div>"
+              );
+              infowindow.open(map, this);
+            });
+    }
+  }
+</script>
+
+<script src="https://maps.googleapis.com/maps/api/js?key=<%=mapKey%>&libraries=places&callback=initMap"
+async></script>
+
