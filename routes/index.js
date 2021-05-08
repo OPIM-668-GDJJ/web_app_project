@@ -1,9 +1,14 @@
 var express = require('express');
 var router = express.Router();
 
+const MAPS_API_KEY = process.env.MAPS_API_KEY
+
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('index', { title: 'My App' });
+  res.render('index', {
+    title: 'My App',
+    mapKey: MAPS_API_KEY
+  });
 });
 
 /* GET about page. */
