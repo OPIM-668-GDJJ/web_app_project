@@ -1,0 +1,24 @@
+<div class="container">
+    <div class="row">
+        <% hits.forEach(function(hit){ %>
+            <div class="card m-3 col-sm-5">
+                <img class="card-img-top" src="<%=hit.recipe.image%>" alt="Card image cap">
+                <div class="card-body">
+                    <h5 class="card-title">
+                        <%=hit.recipe.label%>
+                    </h5>
+                    <p class="card-text">
+                        <h6 class="card-subtitle mb-2 text-muted">Ingredients</h6>
+                        <ul>
+                            <% hit.recipe.ingredientLines.forEach(function(ing){ %>
+                                <li><%=ing%></li>
+                            <% }); %>
+                        </ul>
+                        <strong>Source: </strong><%=hit.recipe.source%>
+                    </p>
+                    <a href="<%=hit.recipe.url%>" class="btn btn-primary" target="_blank">View Recipe</a>
+                </div>
+            </div>
+            <% }); %>
+    </div>
+</div>
