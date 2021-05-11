@@ -21,4 +21,9 @@ router.get('/recipes', function(req, res, next) {
   res.render('recipes');
 });
 
+/* GET Contact page. */
+router.get('/Contact BrkfastDani', function(req, res, next) {
+  res.render('Contact BrkfastDani');
+});
+
 module.exports = router;
