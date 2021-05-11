@@ -1,62 +1,68 @@
-<div id="myCarousel" class="carousel slide" data-bs-ride="carousel">
-  <div class="carousel-indicators">
-    <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-    <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
-    <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="2" aria-label="Slide 3"></button>
-  </div>
-  <div class="carousel-inner">
-    <div class="carousel-item active">
-      <div class=" carousel-image" width="100%" height="100%" aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false" style="background-image: url(images/view.jpg)">
-        <div class="carousel-overlay"></div>
-      </div>
+<div class="container">
+  <div id="myCarousel" class="carousel slide" data-bs-ride="carousel">
+    <div class="carousel-indicators">
+      <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="0" class="active" aria-current="true"
+        aria-label="Slide 1"></button>
+      <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
+      <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="2" aria-label="Slide 3"></button>
+    </div>
+    <div class="carousel-inner">
+      <div class="carousel-item active">
+        <div class=" carousel-image" width="100%" height="100%" aria-hidden="true" preserveAspectRatio="xMidYMid slice"
+          focusable="false" style="background-image: url(images/view.jpg)">
+          <div class="carousel-overlay"></div>
+        </div>
 
-      <div class="container">
+
         <div class="carousel-caption text-start">
           <h1>Breakfast</h1>
           <p>Yum!</p>
           <p><a class="btn btn-lg btn-primary" href="#firstSection">Learn more</a></p>
         </div>
-      </div>
-    </div>
-    <div class="carousel-item">
-      <div class=" carousel-image" width="100%" height="100%" aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false" style="background-image: url(images/franchtoast.jpg)">
-        <div class="carousel-overlay"></div>
-      </div>
 
-      <div class="container">
+      </div>
+      <div class="carousel-item">
+        <div class=" carousel-image" width="100%" height="100%" aria-hidden="true" preserveAspectRatio="xMidYMid slice"
+          focusable="false" style="background-image: url(images/franchtoast.jpg)">
+          <div class="carousel-overlay"></div>
+        </div>
+
+
         <div class="carousel-caption">
           <h1>Something else</h1>
           <p>Yay!</p>
           <p><a class="btn btn-lg btn-primary" href="#secondSection">Learn more</a></p>
         </div>
-      </div>
-    </div>
-    <div class="carousel-item">
-      <div class=" carousel-image" width="100%" height="100%" aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false" style="background-image: url(images/oatmeal.jpg)">
-        <div class="carousel-overlay"></div>
-      </div>
 
-      <div class="container">
+      </div>
+      <div class="carousel-item">
+        <div class=" carousel-image" width="100%" height="100%" aria-hidden="true" preserveAspectRatio="xMidYMid slice"
+          focusable="false" style="background-image: url(images/oatmeal.jpg)">
+          <div class="carousel-overlay"></div>
+        </div>
+
+
         <div class="carousel-caption text-end">
           <h1>Dinner??</h1>
           <p>No way!</p>
           <p><a class="btn btn-lg btn-primary" href="#thirdSection">Learn more</a></p>
         </div>
+
       </div>
     </div>
+    <button class="carousel-control-prev" type="button" data-bs-target="#myCarousel" data-bs-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#myCarousel" data-bs-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Next</span>
+    </button>
   </div>
-  <button class="carousel-control-prev" type="button" data-bs-target="#myCarousel" data-bs-slide="prev">
-    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-    <span class="visually-hidden">Previous</span>
-  </button>
-  <button class="carousel-control-next" type="button" data-bs-target="#myCarousel" data-bs-slide="next">
-    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-    <span class="visually-hidden">Next</span>
-  </button>
+
+  <div id="map"></div>
+
 </div>
-<div id="map"></div>
-
-
 
 <script type="text/javascript">
   let map;
@@ -73,10 +79,10 @@
     });
 
     var request = {
-        location: coordinates,
-        radius: '1000',
-        query: 'breakfast'
-      };
+      location: coordinates,
+      radius: '1000',
+      query: 'breakfast'
+    };
     service = new google.maps.places.PlacesService(map);
     service.textSearch(request, (results, status) => {
       if (status === google.maps.places.PlacesServiceStatus.OK && results) {
@@ -95,17 +101,15 @@
       });
       console.log("place name: ", place.name)
       google.maps.event.addListener(marker, "click", function () {
-              infowindow.setContent(
-                "<div><strong>" +
-                  place.name +
-                  "</strong></div>"
-              );
-              infowindow.open(map, this);
-            });
+        infowindow.setContent(
+          "<div><strong>" +
+          place.name +
+          "</strong></div>"
+        );
+        infowindow.open(map, this);
+      });
     }
   }
 </script>
 
-<script src="https://maps.googleapis.com/maps/api/js?key=<%=mapKey%>&libraries=places&callback=initMap"
-async></script>
-
+<script src="https://maps.googleapis.com/maps/api/js?key=<%=mapKey%>&libraries=places&callback=initMap" async></script>
