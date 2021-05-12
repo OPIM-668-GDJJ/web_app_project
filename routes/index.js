@@ -22,8 +22,8 @@ router.get('/recipes', function(req, res, next) {
 });
 
 /* GET Contact page. */
-router.get('/Contact BrkfastDani', function(req, res, next) {
-  res.render('Contact BrkfastDani');
+router.get('/contact', function(req, res, next) {
+  res.render('contact');
 });
 
 module.exports = router;
