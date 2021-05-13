@@ -31,6 +31,8 @@ Now, run `npm install` to download required packages which are listed in the `pa
 ## Credentials
 To run the site, you will need a Google Maps API key. Please see [these instructions](https://developers.google.com/maps/gmp-get-started) on how to set up a Google developer account and get API keys.
 
+Contact form is setup using Formspree (https://formspree.io/). You need to create an account on Formspree and update the form tag with your link to receive contact form data.
+
 You will also need an API key and app ID from Edamam, an online recipe database. Please see (https://developer.edamam.com/) for how to set this up.
 
 You will need to set up a `.env` file to run the app correctly. The contents of the file should be as follows, filled in with your credentials:
