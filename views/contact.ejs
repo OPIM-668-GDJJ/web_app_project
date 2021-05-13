@@ -12,7 +12,7 @@
 <h3>Contact BrkfastDani</h3>
 
 <!-- Handling contact form through https://formspree.io/ -->
-<form id="my-form" action="https://formspree.io/f/meqvaajq" method="POST">
+<form id="my-form" class="needs-validation" action="https://formspree.io/f/meqvaajq" method="POST" novalidate>
 
     <div id="my-form-status">
 
@@ -20,22 +20,31 @@
 
     <div class="form-group m-3">
         <label for="name">Full Name</label>
-        <input type="name" name="name" class="form-control" id="name" placeholder="Dani Cardenas">
+        <input type="name" name="name" class="form-control" id="name" placeholder="Dani Cardenas" required>
+        <div class="invalid-feedback">
+            Please enter a name.
+        </div>
     </div>
 
     <div class="form-group m-3">
         <label for="email">Email address</label>
-        <input type="email" name="email" class="form-control" id="email" placeholder="name@example.com">
+        <input type="email" name="_replyto" class="form-control" id="email" placeholder="name@example.com" required>
+        <div class="invalid-feedback">
+            Please enter a valid email.
+        </div>
     </div>
 
-    <div class="form-group m-3">
+    <!-- <div class="form-group m-3">
         <label for="file">Upload a picture of your breakfast</label>
-        <input type="file" name="file" class="form-control" id="file">
-    </div>
+        <input type="file" name="attachment" class="form-control" id="file">
+    </div> -->
 
     <div class="form-group m-3">
         <label for="message">Message</label>
-        <textarea class="form-control" name="message" id="message" rows="10"></textarea>
+        <textarea class="form-control" name="message" id="message" rows="10" required></textarea>
+        <div class="invalid-feedback">
+            Please enter a message.
+        </div>
     </div>
 
     <button type="submit" class="btn btn-primary m-3">Submit</button>
@@ -43,25 +52,40 @@
 
 
 <script type="text/javascript">
-    // Handling contact form through https://formspree.io/
-    var form = document.getElementById("my-form");
+    // Handling Validation
+    
+        var form = document.getElementById("my-form");
+        form.addEventListener('submit', function (event) {
 
-    async function handleSubmit(event) {
-        event.preventDefault();
-        var status = document.getElementById("my-form-status");
-        var data = new FormData(event.target);
-        fetch(event.target.action, {
-            method: form.method,
-            body: data,
-            headers: {
-                'Accept': 'application/json'
+            if (!form.checkValidity()) {
+                event.preventDefault()
+                event.stopPropagation()
             }
-        }).then(response => {
-            status.innerHTML = '<div class="alert alert-success" role="alert">Thank you for contacting me. I will reach out to you shortly!</div>';
-            form.reset()
-        }).catch(error => {
-            status.innerHTML = '<div class="alert alert-danger" role="alert">Oops! There was a problem submitting your form!</div>'
-        });
-    }
-    form.addEventListener("submit", handleSubmit)
+            if (form.checkValidity()) {
+                handleSubmit(event)
+            }
+
+            form.classList.add('was-validated')
+        }, false)
+
+        // Handling contact form through https://formspree.io/
+
+        async function handleSubmit(event) {
+            event.preventDefault();
+            var status = document.getElementById("my-form-status");
+            var data = new FormData(event.target);
+            fetch(event.target.action, {
+                method: form.method,
+                body: data,
+                headers: {
+                    'Accept': 'application/json'
+                }
+            }).then(response => {
+                status.innerHTML = '<div class="alert alert-success" role="alert">Thank you for contacting me. I will reach out to you shortly!</div>';
+                //form.reset()
+            }).catch(error => {
+                status.innerHTML = '<div class="alert alert-danger" role="alert">Oops! There was a problem submitting your form!</div>'
+            });
+        }
+    //form.addEventListener("submit", handleSubmit)
 </script>
